@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Push Rush: The Flesh Ritual</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:;base64,=">
+</head>
+<body>
+    <div id="mainMenuScreen" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #050505; z-index: 200; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white;">
+        <h1 style="font-size: 60px; color: #ff0000; text-shadow: 0 0 20px red; margin-bottom: 10px;">DARK FOREST</h1>
+        <p style="color: #888; margin-bottom: 40px;">Survival RPG v1.9</p>
+        
+        <button id="btnContinue" style="display: none; padding: 15px 40px; font-size: 24px; background: #333; color: white; border: 2px solid #00ff00; cursor: pointer; margin-bottom: 20px;">ПРОДОЛЖИТЬ</button>
+        <button id="btnNewGame" style="padding: 15px 40px; font-size: 24px; background: #333; color: white; border: 2px solid #555; cursor: pointer;">НОВАЯ ИГРА</button>
+    </div>
+
+<div id="gameContainer">
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
+    
+    <div id="uiLayer">
+        <div class="bars-container">
+            <div class="bar-wrap"><div id="hpBar" class="bar-fill hp"></div></div>
+            <div class="bar-wrap"><div id="staminaBar" class="bar-fill stamina"></div></div>
+        </div>
+
+        <div class="stat-box">
+            <h1>АЛТАРЬ (E - Меню)</h1>
+            <p>Эссенция: <span id="altarPower" style="color: #f0f;">0</span></p>
+            <p>Статус: <span id="dayCycle" style="font-weight: bold; color: yellow;">ДЕНЬ</span></p>
+        </div>
+       <div class="stat-box">
+            <h1>ИНВЕНТАРЬ</h1>
+            <p>Плоть: <span id="fleshCount">0</span></p>
+            <p>Кубы: <span id="cubeCount" style="color: #ff00ff; font-weight: bold;">0</span></p> 
+            <p>Резонаторы: <span id="resCount" style="color: cyan; font-weight: bold;">0</span></p>
+            <p id="fleshStatus">Пусто</p>
+        </div>
+    </div>
+    
+    <div id="upgradeMenu" class="overlay-menu" style="display: none;">
+        
+        <div class="tabs-header">
+            <button id="tabMutations" class="tab-btn active">🧬 МУТАЦИИ</button>
+            <button id="tabBuild" class="tab-btn">🔨 СТРОЙКА</button>
+        </div>
+
+        <div id="viewMutations" class="tab-content">
+            <h2>УЛУЧШЕНИЕ ПЛОТИ</h2>
+            <div class="upgrade-grid">
+                <div class="upgrade-card" id="btnDmg">
+                    <h3>КОГТИ</h3>
+                    <p>Урон +5</p>
+                    <button>Цена: 50</button>
+                </div>
+                <div class="upgrade-card" id="btnSpd">
+                    <h3>СУХОЖИЛИЯ</h3>
+                    <p>Скорость +10</p>
+                    <button>Цена: 30</button>
+                </div>
+                <div class="upgrade-card" id="btnHeal">
+                    <h3>РЕГЕНЕРАЦИЯ</h3>
+                    <p>Лечение (50 HP)</p>
+                    <button>Цена: 20</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="viewBuild" class="tab-content" style="display: none;">
+            <h2>ОБОРОНА БАЗЫ</h2>
+            <div class="upgrade-grid" id="buildGrid">
+                <div class="upgrade-card" id="btnBuildWall" style="border-color: #777;">
+                    <h3>БАРИКАДА</h3>
+                    <p>HP: 200</p>
+                    <button>Цена: 10</button>
+                </div>
+                <div class="upgrade-card" id="btnBuildSpikes" style="border-color: #555;">
+                    <h3>ШИПЫ</h3>
+                    <p>Урон: 5/сек</p>
+                    <button>Цена: 5</button>
+                </div>
+                <div class="upgrade-card" id="btnBuildGate" style="border-color: #8B4513;">
+                    <h3>ВОРОТА</h3>
+                    <p>Проход</p>
+                    <button>Цена: 15</button>
+                </div>
+                <div class="upgrade-card" id="btnBuildTower" style="border-color: #44f;">
+                    <h3>БАШНЯ</h3>
+                    <p>Dmg: 20</p>
+                    <button>Цена: 40</button>
+                </div>
+                
+                <div class="upgrade-card" id="btnBuildPortal" style="border-color: #00ffff; display: none; box-shadow: 0 0 15px cyan;">
+                    <h3 style="color: cyan;">ПОРТАЛ</h3>
+                    <p>Покинуть лес</p>
+                    <button style="background: cyan; color: black;">БЕСПЛАТНО</button>
+                </div>
+                
+                </div>
+        </div>
+
+        <p style="margin-top: 20px; color: #888;">E - Закрыть | ПКМ - Отмена</p>
+    </div>
+
+    <div id="gameOverScreen" class="overlay-menu" style="display: none;">
+        <h1>ТЫ ПОГИБ</h1>
+        <button onclick="window.location.reload()">НОВАЯ ЖЕРТВА</button>
+    </div>
+
+    <div id="message"></div>
+</div>
+
+<script type="module" src="game.js"></script>
+</body>
+<div id="worldMapScreen" style="display: none;">
+    <h1 style="color: cyan; margin-bottom: 20px;">КАРТА МИРА</h1>
+    <div id="mapGrid">
+        </div>
+    <button id="closeMapBtn" style="margin-top: 20px; background: #333; color: white; padding: 10px 30px; border: 1px solid #555; cursor: pointer;">ЗАКРЫТЬ</button>
+</div>
+</html>
